@@ -141,7 +141,7 @@ class Bomb:
         screen.blit(self.img, self.rct)
 
 
-def main():
+def main(): #main関数
     pg.display.set_caption("たたかえ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))    
     bg_img = pg.image.load("fig/pg_bg.jpg")
@@ -174,7 +174,7 @@ def main():
                 time.sleep(1)
                 return
         
-        if bomb is not None:
+        if bomb is not None: 
             for i, bomb in enumerate(bombs):
                 if beam is not None:
                     if beam.rct.colliderect(bomb.rct):
