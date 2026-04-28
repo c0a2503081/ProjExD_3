@@ -160,8 +160,12 @@ class Score:
         self.rct.center = (100, HEIGHT - 50) 
     
     def update(self, screen: pg.Surface):
-        self.img = self.font.render(f"SCORE:{self.score}",0,self.color)
-        screen.blit(self.img,self.rct)
+        """
+        現在のスコアを反映させた文字列Surfaceを生成し、画面に転送する
+        引数:screen Surface
+        """
+        self.img = self.font.render(f"Score: {self.score}", 0, self.color)
+        screen.blit(self.img, self.rct)
 
 
 class Explosion:
