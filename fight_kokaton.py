@@ -139,6 +139,23 @@ class Bomb:
             self.vy *= -1
         self.rct.move_ip(self.vx, self.vy)
         screen.blit(self.img, self.rct)
+        
+
+class Score:
+    """
+    スコア表示クラス
+    """
+    def __init__(self):
+        self.font = pg.font.SysFont("None",30)
+        self.color = (0,0,255)
+        self.score = 0
+        self.img = self.font.render(f"SCORE:{self.score}",0,self.color)
+        self.rct = self.img.get_rect()
+        self.rct.center = (100, HEIGHT - 50) 
+    
+    def update(self, screen: pg.Surface):
+        self.img = self.font.render(f"SCORE:{self.score}",0,self.color)
+        screen.blit(self.img,self.rct)
 
 
 def main(): #main関数
@@ -154,6 +171,7 @@ def main(): #main関数
     beam = None  # ゲーム初期化時にはビームは存在しない
     clock = pg.time.Clock()
     tmr = 0
+    score = Score()
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -180,6 +198,7 @@ def main(): #main関数
                     if beam.rct.colliderect(bomb.rct):
                         bombs[i] = None
                         beam = None
+                        score.score +=1
                         bird.change_img(9,screen)
                         pg.display.update()
                         time.sleep(1)
@@ -193,9 +212,12 @@ def main(): #main関数
             beam.update(screen)   
         for bomb in bombs:
             bomb.update(screen)
+        score.update(screen)
+        
         pg.display.update()
         tmr += 1
         clock.tick(50)
+        
 
 if __name__ == "__main__":
     pg.init()
